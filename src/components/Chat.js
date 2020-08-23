@@ -43,7 +43,7 @@ const Chat = () => {
             <div className="chat__footer">
                 <InsertEmoticonIcon/>
                 <form>
-                    <input type="text"/>
+                    <input type="text" placeholder="Type a message"/>
                     <button>Send</button>
                 </form>
                 <MicIcon/>
