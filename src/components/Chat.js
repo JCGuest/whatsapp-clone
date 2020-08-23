@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Chat.css';
 import { Avatar, IconButton } from "@material-ui/core";
 import SearchOutlined from '@material-ui/icons/SearchOutlined';
@@ -8,6 +8,14 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 
 const Chat = () => {
+
+    const [message, setMessage] = useState("")
+
+    const handleSend = (e) => {
+        e.preventDefault();
+        console.log(message)
+    };
+
     return (
         <div className="chat">
             <div className="chat__header">
@@ -43,8 +51,8 @@ const Chat = () => {
             <div className="chat__footer">
                 <InsertEmoticonIcon/>
                 <form>
-                    <input type="text" placeholder="Type a message"/>
-                    <button>Send</button>
+                    <input type="text" placeholder="Type a message" value={message} onChange={(e) => setMessage(e.target.value)} />
+                    <button type="submit" onClick={handleSend}>send</button>
                 </form>
                 <MicIcon/>
             </div>

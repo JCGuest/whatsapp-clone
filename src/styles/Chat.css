@@ -89,7 +89,13 @@
     border: none;
 }
 
+
 /* Retain "enter to submit" functionality with no visible button */
 .chat__footer > form > button {
     display: none;
+}
+
+.chat__footer > .MuiSvgIcon-root {
+    padding: 10px;
+    color: gray;
 }
