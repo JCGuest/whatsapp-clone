@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../styles/SidebarChat.css';
 import { Avatar } from "@material-ui/core";
 
 const SidebarChat = (props) => {
-
-    const [seed, setSeed] = useState("")
-
-    useEffect( () => {
-        setSeed(Math.floor(Math.random() * 5000));
-    }, [])
 
     const createChat = () => {
         const roomName = prompt("Please enter name for chat")
