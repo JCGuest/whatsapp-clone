@@ -51,3 +51,10 @@ justify-content: space-between;
     margin-right: 2vw;
     font-size: 24px !important;
 }
+
+/* using flex to fill the rest of .sidebar */
+.sidebar__chats {
+    flex: 1;
+    overflow: scroll;
+    background-color: white;
+}
