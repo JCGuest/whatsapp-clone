@@ -6,20 +6,22 @@ import AttachFile from '@material-ui/icons/AttachFile';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
+// import SelectInput from '@material-ui/core/Select/SelectInput';
 
 const Chat = () => {
 
     const [message, setMessage] = useState("")
-
     const handleSend = (e) => {
         e.preventDefault();
         console.log(message)
+        setMessage("");
     };
+    const avatarUrl = `https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random() * 5000)}.svg`;
 
     return (
         <div className="chat">
             <div className="chat__header">
-                <Avatar  src={`https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random() * 5000)}.svg`}/>
+                <Avatar  src={avatarUrl}/>
                 <div className="chat__headerInfo">
                     <h3>Room Name</h3>
                     <p>Last seen at...</p>

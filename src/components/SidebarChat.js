@@ -12,9 +12,10 @@ const SidebarChat = (props) => {
         }
     };
 
+    const avatarUrl = `https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random() * 5000)}.svg`
     return !props.addNewChat ? (
         <div className="sidebarChat">
-            <Avatar src={`https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random() * 5000)}.svg`}/>
+            <Avatar src={avatarUrl}/>
             <div className="sidebarChat__info">
                 <h2>Room Name</h2>
                 <p>Last Message</p>
