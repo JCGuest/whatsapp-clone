@@ -6,7 +6,7 @@ import AttachFile from '@material-ui/icons/AttachFile';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 // import SelectInput from '@material-ui/core/Select/SelectInput';
 
 const Chat = () => {

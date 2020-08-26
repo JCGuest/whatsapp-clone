@@ -11,17 +11,14 @@ function App() {
       <h1>WhatsReactApp</h1>
         <div className="app__body">
           <Router>
+            <Sidebar/>
               <Switch>
-              <Sidebar/>
-            
-                <Route path="/">
-                  <Chat/>
-                </Route>
-                
                 <Route path="/rooms/:roomId">
                   <Chat/>
                 </Route>
-
+                <Route exact path='/'>
+                  <Chat/>
+                </Route>
               </Switch>
           </Router> 
 
