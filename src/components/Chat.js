@@ -10,18 +10,19 @@ import { useParams } from 'react-router-dom';
 import db from '../firebase';
 // import SelectInput from '@material-ui/core/Select/SelectInput';
 
-const Chat = () => {
+const Chat = (props) => {
     const { roomId } = useParams();
     const [message, setMessage] = useState("");
     const [roomName, setRoomName] = useState("");
 
     useEffect(() => {
+        // Real-time listener to set Room name 
         if (roomId) {
             db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
                 setRoomName(snapshot.data().name)
-            }
+            })
         }
-    },[roomId])
+    },[roomId]);
 
     const handleSend = (e) => {
         e.preventDefault();
@@ -35,7 +36,7 @@ const Chat = () => {
             <div className="chat__header">
                 <Avatar  src={avatarUrl}/>
                 <div className="chat__headerInfo">
-                    <h3>Room Name</h3>
+                    <h3>{roomName}</h3>
                     <p>Last seen at...</p>
                 </div>
             
