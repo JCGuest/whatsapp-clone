@@ -18,6 +18,7 @@ const SidebarChat = (props) => {
 
     const avatarUrl = `https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random() * 5000)}.svg`
     return !props.addNewChat ? (
+        <Link to={`/rooms/${props.id}`}>
             <div className="sidebarChat">
             <Avatar src={avatarUrl}/>
                 <div className="sidebarChat__info">
@@ -25,6 +26,7 @@ const SidebarChat = (props) => {
                     <p>Last Message</p>
                 </div>
             </div>
+        </Link>
         
     ) : (
         <div onClick={createChat}

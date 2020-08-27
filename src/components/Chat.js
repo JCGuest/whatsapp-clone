@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Chat.css';
 import { Avatar, IconButton } from "@material-ui/core";
 import SearchOutlined from '@material-ui/icons/SearchOutlined';
@@ -6,12 +6,23 @@ import AttachFile from '@material-ui/icons/AttachFile';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import db from '../firebase';
 // import SelectInput from '@material-ui/core/Select/SelectInput';
 
 const Chat = () => {
-    // const { roomId } = useParams();
-    const [message, setMessage] = useState("")
+    const { roomId } = useParams();
+    const [message, setMessage] = useState("");
+    const [roomName, setRoomName] = useState("");
+
+    useEffect(() => {
+        if (roomId) {
+            db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
+                setRoomName(snapshot.data().name)
+            }
+        }
+    },[roomId])
+
     const handleSend = (e) => {
         e.preventDefault();
         console.log(message)
