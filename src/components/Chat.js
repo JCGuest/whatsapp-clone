@@ -20,13 +20,21 @@ const Chat = (props) => {
         if (roomId) {
             db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
                 setRoomName(snapshot.data().name)
-            })
+            });
+
+            db.collection("rooms")
+            .doc(roomId)
+            .collection("messages")
+            .orderBy("timestamp", "asc")
+            .onSnapshot((snapshot) => 
+                setMessages(snapshot.docs.map((doc) =>
+                    doc.data()))
+                )
         }
     },[roomId]);
 
     const handleSend = (e) => {
         e.preventDefault();
-        console.log(message)
         setMessage("");
     };
     const avatarUrl = `https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random() * 5000)}.svg`;
@@ -53,14 +61,19 @@ const Chat = (props) => {
             </div>
         </div>
             <div className="chat__body">
-                {/* calls chat__reciever css if username is true */}
+            {messages.map(message => (
                 <p className={`chat__message ${true && "chat__reciever"}`}>
                     <span className="chat__name">
-                        Name</span>
-                    Hey, guys
+                        {message.name}
+                    </span>
+                        {message.message}
                     <span className="chat__timestamp">
-                        time</span>
-                </p>
+                        {new Date(message.timestamp?.toDate()).toUTCString()}
+                    </span>
+             </p>
+
+                 ))}
+               
             </div>
 
             <div className="chat__footer">
