@@ -12,7 +12,7 @@ function App() {
   return (
     // BEM naming convention "app"
     <div className="app">
-      {user? (
+      {!user? (
         <Login/>
       ): (
         <div className="app__body">

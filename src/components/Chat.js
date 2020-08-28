@@ -8,17 +8,23 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import { useParams } from 'react-router-dom';
 import db from '../firebase';
+import { useStateValue } from "../StateProvider.js";
+import firebase from 'firebase';
 // import SelectInput from '@material-ui/core/Select/SelectInput';
 
 const Chat = (props) => {
+    const [input, setInput] = useState("")
     const { roomId } = useParams();
-    const [message, setMessage] = useState("");
+    const [messages, setMessages] = useState([]);
     const [roomName, setRoomName] = useState("");
+    const [{user}, dispatch] = useStateValue();
 
     useEffect(() => {
         // Real-time listener to set Room name 
         if (roomId) {
-            db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
+            db.collection('rooms')
+            .doc(roomId)
+            .onSnapshot(snapshot => {
                 setRoomName(snapshot.data().name)
             });
 
@@ -35,7 +41,13 @@ const Chat = (props) => {
 
     const handleSend = (e) => {
         e.preventDefault();
-        setMessage("");
+        db.collection("rooms").doc(roomId).collection("messages").add({
+            messages: input,
+            name: user.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        setMessages("");
     };
     const avatarUrl = `https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random() * 5000)}.svg`;
 
@@ -61,12 +73,13 @@ const Chat = (props) => {
             </div>
         </div>
             <div className="chat__body">
+                
             {messages.map(message => (
                 <p className={`chat__message ${true && "chat__reciever"}`}>
                     <span className="chat__name">
                         {message.name}
                     </span>
-                        {message.message}
+                        {message.messages}
                     <span className="chat__timestamp">
                         {new Date(message.timestamp?.toDate()).toUTCString()}
                     </span>
@@ -79,7 +92,7 @@ const Chat = (props) => {
             <div className="chat__footer">
                 <InsertEmoticonIcon/>
                 <form>
-                    <input type="text" placeholder="Type a message" value={message} onChange={(e) => setMessage(e.target.value)} />
+                    <input type="text" placeholder="Type a message" value={input} onChange={(e) => setInput(e.target.value)} />
                     <button type="submit" onClick={handleSend}>send</button>
                 </form>
                 <MicIcon/>
