@@ -51,6 +51,7 @@ const Chat = (props) => {
             name: user.displayName,
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
+        setInput("");
     };
     const avatarUrl = `https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random() * 5000)}.svg`;
 
@@ -91,7 +92,7 @@ const Chat = (props) => {
                             {new Date(message.timestamp?.toDate()).toUTCString()}
                         </span>
                     </p>
-                ))};
+                ))}
             </div>
 
             <div className="chat__footer">
