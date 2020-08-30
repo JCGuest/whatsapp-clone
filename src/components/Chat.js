@@ -21,14 +21,11 @@ const Chat = (props) => {
     
 
     useEffect(() => {
-        // Real-time listener to set Room name 
-        console.log("useEffect")
         if (roomId) {
             db.collection('rooms')
             .doc(roomId)
             .onSnapshot(snapshot => {
                 setRoomName(snapshot.data().name)
-                console.log("setRoomName")
             });
 
             db.collection("rooms")
